@@ -1,1 +1,18 @@
 __pycache__
+# Virtual Environment
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+venv/Lib/site-packages/cffi/_cffi_include.h
+
+# Audio files (too large for GitHub)
+Data/my_voice/*.wav
+*.wav
+
+# Large model files
+Utils/ASR/*.pth
+Utils/PLBERT/*.t7
+Utils/JDC/*.t7
