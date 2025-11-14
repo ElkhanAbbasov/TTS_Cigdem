@@ -9,8 +9,13 @@ venv.bak/
 venv/Lib/site-packages/cffi/_cffi_include.h
 
 # Audio files (too large for GitHub)
-Data/my_voice/*.wav
-*.wav
+# Data/my_voice/*.wav  # Commented out to allow training data upload
+# *.wav  # Only exclude WAV files in specific directories, not all WAVs
+
+# Exclude generated/output audio files
+test_*.wav
+output_*.wav
+generated_*.wav
 
 # Large model files - DON'T UPLOAD TO GITHUB
 Utils/ASR/*.pth
