@@ -1,1 +1,11 @@
-Data/your_voice/audio_001.wav|Your transcription text here|speaker1
+Data/my_voice/questions/question_001.wav|Türkiye Cumhuriyeti vatandaşı mısınız? Evet. - Hayır.|speaker1
+Data/my_voice/questions/question_002.wav|Yaşadığınız ili öğrenebilir miyim?|speaker1
+Data/my_voice/questions/question_003.wav|Yaşınızı öğrenebilir miyim?|speaker1
+Data/my_voice/questions/question_004.wav|Türkiye'nin genel gidişatını nasıl görüyorsunuz? Seçenekler: İyiye gidiyor. - Kötüye gidiyor. - Aynı kalacak.|speaker1
+Data/my_voice/questions/question_006.wav|Türkiye'nin ekonomik gidişatını nasıl buluyorsunuz? Seçenekler: İyiye gidiyor. - Kötüye gidiyor. - Aynı kalacak.|speaker1
+Data/my_voice/questions/question_007.wav|Cumhurbaşkanı Recep Tayyip Erdoğan'ın performansını genel olarak nasıl buluyorsunuz? Seçenekler: Başarılı. - Başarısız. - Fikrim yok.|speaker1
+Data/my_voice/questions/question_008.wav|Hükümetin asgari ücrete yaptığı artışa yönelik kanaatiniz nedir? Seçenekler: Yeterli bir artıştı. - Yetersiz bir artıştı. - Fikrim yok.|speaker1
+Data/my_voice/questions/question_011.wav|Hükümetin memur ve emekli ücretlerinde yaptığı artışa yönelik kanaatiniz nedir? Seçenekler: Yeterli bir artıştı. - Yetersiz bir artıştı. - Fikrim yok.|speaker1
+Data/my_voice/questions/question_013.wav|Önümüzdeki ay maaşınız veya hiçbir geliriniz olmazsa ne kadar süre idare edebilirsiniz? Seçenekler: Hiç idare edemem. - Bir ay idare ederim. - 2-3 ay idare ederim. - 3 aydan fazla idare ederim. - Cevap vermek istemiyorum.|speaker1
+Data/my_voice/questions/question_016.wav|Sizce bu sene enflasyon nasıl bir seyir izleyecek? Seçenekler: Enflasyon artacak. - Enflasyon azalacak. - Aynı kalacak. - Fikrim yok.|speaker1
+Data/my_voice/questions/question_017.wav|Hükümetin yaşanmakta olan ekonomik sorunları çözeceğine inanıyor musunuz? Seçenekler: İnanıyorum. - İnanmıyorum. - Fikrim yok.|speaker1

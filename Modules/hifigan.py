@@ -444,6 +444,27 @@ class Decoder(nn.Module):
 
         
     def forward(self, asr, F0_curve, N, s):
+        # Ensure F0_curve and N have correct shape [batch, time]
+        # F0_curve might come in as [batch, time, 1] or [batch, feature, time]
+        # We need [batch, time] for the conv1d operation
+        
+        # Force reshape to [batch, time] by squeezing all size-1 dimensions
+        if F0_curve.dim() > 2:
+            # Remove all dimensions of size 1
+            F0_curve = F0_curve.squeeze()
+            # Ensure we have 2D: [batch, time]
+            if F0_curve.dim() == 1:
+                F0_curve = F0_curve.unsqueeze(0)  # Add batch dimension back
+            elif F0_curve.dim() == 0:
+                F0_curve = F0_curve.unsqueeze(0).unsqueeze(0)
+        
+        if N.dim() > 2:
+            N = N.squeeze()
+            if N.dim() == 1:
+                N = N.unsqueeze(0)
+            elif N.dim() == 0:
+                N = N.unsqueeze(0).unsqueeze(0)
+            
         if self.training:
             downlist = [0, 3, 7]
             F0_down = downlist[random.randint(0, 2)]

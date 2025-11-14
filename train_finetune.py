@@ -88,7 +88,11 @@ def main(config_path):
     optimizer_params = Munch(config['optimizer_params'])
     
     train_list, val_list = get_data_path_list(train_path, val_path)
-    device = 'cuda'
+    # Use CUDA only when it is available. Some PyTorch builds (CPU-only) will raise
+    # an AssertionError if you try to initialize CUDA via .to('cuda'). Detect
+    # availability and fall back to CPU to avoid the crash seen earlier.
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print('Using device:', device)
 
     train_dataloader = build_dataloader(train_list,
                                         root_path,
@@ -256,6 +260,10 @@ def main(config_path):
         model.mpd.train()
 
         for i, batch in enumerate(train_dataloader):
+            # Clear CUDA cache at the start of each batch to prevent fragmentation
+            if device == 'cuda':
+                torch.cuda.empty_cache()
+            
             waves = batch[0]
             batch = [b.to(device) for b in batch[1:]]
             texts, input_lengths, ref_texts, ref_lengths, mels, mel_input_length, ref_mels = batch
@@ -392,12 +400,40 @@ def main(config_path):
 
                 N_real = log_norm(gt.unsqueeze(1)).squeeze(1)
                 
+                # Ensure F0_real and N_real have shape [batch, time] for decoder
+                # They might come as [batch, time, 1] or [batch, channels, time]
+                # Squeeze all size-1 dimensions then ensure 2D
+                F0_real = F0_real.squeeze()
+                if F0_real.dim() == 1:
+                    F0_real = F0_real.unsqueeze(0)  # Add batch dim back
+                elif F0_real.dim() == 0:
+                    F0_real = F0_real.view(1, 1)
+                    
+                N_real = N_real.squeeze()
+                if N_real.dim() == 1:
+                    N_real = N_real.unsqueeze(0)
+                elif N_real.dim() == 0:
+                    N_real = N_real.view(1, 1)
+                
                 y_rec_gt = wav.unsqueeze(1)
                 y_rec_gt_pred = model.decoder(en, F0_real, N_real, s)
 
                 wav = y_rec_gt
 
             F0_fake, N_fake = model.predictor.F0Ntrain(p_en, s_dur)
+            
+            # Ensure F0_fake and N_fake have shape [batch, time] for decoder
+            F0_fake = F0_fake.squeeze()
+            if F0_fake.dim() == 1:
+                F0_fake = F0_fake.unsqueeze(0)
+            elif F0_fake.dim() == 0:
+                F0_fake = F0_fake.view(1, 1)
+                
+            N_fake = N_fake.squeeze()
+            if N_fake.dim() == 1:
+                N_fake = N_fake.unsqueeze(0)
+            elif N_fake.dim() == 0:
+                N_fake = N_fake.view(1, 1)
 
             y_rec = model.decoder(en, F0_fake, N_fake, s)
 
@@ -455,6 +491,14 @@ def main(config_path):
             
             running_loss += loss_mel.item()
             g_loss.backward()
+            
+            # Gradient clipping to prevent exploding gradients
+            torch.nn.utils.clip_grad_norm_(model.bert_encoder.parameters(), max_norm=1.0)
+            torch.nn.utils.clip_grad_norm_(model.bert.parameters(), max_norm=1.0)
+            torch.nn.utils.clip_grad_norm_(model.predictor.parameters(), max_norm=1.0)
+            torch.nn.utils.clip_grad_norm_(model.style_encoder.parameters(), max_norm=1.0)
+            torch.nn.utils.clip_grad_norm_(model.decoder.parameters(), max_norm=1.0)
+            
             if torch.isnan(g_loss):
                 from IPython.core.debugger import set_trace
                 set_trace()
@@ -674,11 +718,15 @@ def main(config_path):
                     continue
 
         print('Epochs:', epoch + 1)
-        logger.info('Validation loss: %.3f, Dur loss: %.3f, F0 loss: %.3f' % (loss_test / iters_test, loss_align / iters_test, loss_f / iters_test) + '\n\n\n')
+        # Prevent division by zero if validation failed
+        if iters_test > 0:
+            logger.info('Validation loss: %.3f, Dur loss: %.3f, F0 loss: %.3f' % (loss_test / iters_test, loss_align / iters_test, loss_f / iters_test) + '\n\n\n')
+            writer.add_scalar('eval/mel_loss', loss_test / iters_test, epoch + 1)
+            writer.add_scalar('eval/dur_loss', loss_test / iters_test, epoch + 1)
+            writer.add_scalar('eval/F0_loss', loss_f / iters_test, epoch + 1)
+        else:
+            logger.info('Validation skipped (no valid iterations)\n\n\n')
         print('\n\n\n')
-        writer.add_scalar('eval/mel_loss', loss_test / iters_test, epoch + 1)
-        writer.add_scalar('eval/dur_loss', loss_test / iters_test, epoch + 1)
-        writer.add_scalar('eval/F0_loss', loss_f / iters_test, epoch + 1)
         
         
         if (epoch + 1) % save_freq == 0 :

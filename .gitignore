@@ -12,7 +12,14 @@ venv/Lib/site-packages/cffi/_cffi_include.h
 Data/my_voice/*.wav
 *.wav
 
-# Large model files
+# Large model files - DON'T UPLOAD TO GITHUB
 Utils/ASR/*.pth
 Utils/PLBERT/*.t7
 Utils/JDC/*.t7
+Models/*/epoch_*.pth
+Models/*/checkpoints/*.pth
+Models/*/tensorboard/
+
+# Training outputs
+training_output.txt
+training_output.log

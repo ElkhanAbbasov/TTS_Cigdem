@@ -1,13 +1,13 @@
-log_dir: "Models/LJSpeech"
-save_freq: 5
-log_interval: 10
+log_dir: "Models/Cigdem_TTS"
+save_freq: 2  # Save more frequently to catch issues early
+log_interval: 5
 device: "cuda"
-epochs: 50 # number of finetuning epoch (1 hour of data)
-batch_size: 8
-max_len: 400 # maximum number of frames
-pretrained_model: "Models/LibriTTS/epochs_2nd_00020.pth"
-second_stage_load_pretrained: true # set to true if the pre-trained model is for 2nd stage
-load_only_params: true # set to true if do not want to load epoch numbers and optimizer parameters
+epochs: 100  # More epochs since we have small dataset
+batch_size: 1  # Back to 1 for stability
+max_len: 200  # Keep reduced for VRAM
+pretrained_model: "Models/Cigdem_TTS/checkpoints/epoch_2nd_00001.pth"  # Resume from your checkpoint
+second_stage_load_pretrained: true  # Load it
+load_only_params: false  # Load full state including optimizer
 
 F0_path: "Utils/JDC/bst.t7"
 ASR_config: "Utils/ASR/config.yml"
@@ -15,9 +15,9 @@ ASR_path: "Utils/ASR/epoch_00080.pth"
 PLBERT_dir: 'Utils/PLBERT/'
 
 data_params:
-  train_data: "Data/train_list.txt"
-  val_data: "Data/val_list.txt"
-  root_path: "/local/LJSpeech-1.1/wavs"
+  train_data: "Data/my_train_list.txt"
+  val_data: "Data/my_train_list.txt"
+  root_path: ""
   OOD_data: "Data/OOD_texts.txt"
   min_length: 50 # sample until texts with this size are obtained for OOD texts
 

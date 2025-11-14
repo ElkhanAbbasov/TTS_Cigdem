@@ -1,0 +1,50 @@
+INFO:2025-11-13 11:04:37,880: Epoch [1/100], Step [5/11], Loss: 0.51922, Disc Loss: 3.92163, Dur Loss: 2.13530, CE Loss: 0.18559, Norm Loss: 1.47311, F0 Loss: 4.04757, LM Loss: 2.71000, Gen Loss: 4.50747, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 8.03935, Mono Loss: 0.39389
+INFO:2025-11-13 11:06:57,587: Epoch [1/100], Step [10/11], Loss: 0.54466, Disc Loss: 3.75393, Dur Loss: 1.79741, CE Loss: 0.10026, Norm Loss: 1.06192, F0 Loss: 3.68498, LM Loss: 2.62193, Gen Loss: 4.73770, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 9.75530, Mono Loss: 0.08445
+INFO:2025-11-13 11:08:22,556: Validation loss: 0.629, Dur loss: 2.135, F0 loss: 4.966
+
+
+
+INFO:2025-11-13 11:10:55,964: Epoch [2/100], Step [5/11], Loss: 0.40023, Disc Loss: 3.84163, Dur Loss: 2.00561, CE Loss: 0.11486, Norm Loss: 1.58036, F0 Loss: 5.37650, LM Loss: 2.03378, Gen Loss: 4.34121, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 8.81701, Mono Loss: 0.10939
+INFO:2025-11-13 11:13:09,091: Epoch [2/100], Step [10/11], Loss: 0.48399, Disc Loss: 3.80938, Dur Loss: 2.15354, CE Loss: 0.16070, Norm Loss: 0.86305, F0 Loss: 2.53784, LM Loss: 1.87287, Gen Loss: 4.17795, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 7.58152, Mono Loss: 0.51127
+INFO:2025-11-13 11:14:34,553: Validation loss: 0.617, Dur loss: 2.152, F0 loss: 5.015
+
+
+
+INFO:2025-11-13 11:17:16,935: Epoch [3/100], Step [5/11], Loss: 0.58630, Disc Loss: 3.76822, Dur Loss: 1.63909, CE Loss: 0.07842, Norm Loss: 0.81630, F0 Loss: 4.00335, LM Loss: 1.81047, Gen Loss: 4.33065, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 9.26538, Mono Loss: 0.12152
+INFO:2025-11-13 11:38:53,630: Epoch [1/100], Step [5/11], Loss: 0.57971, Disc Loss: 3.90490, Dur Loss: 2.55421, CE Loss: 0.18179, Norm Loss: 1.71600, F0 Loss: 5.63045, LM Loss: 2.55930, Gen Loss: 4.40901, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 9.79038, Mono Loss: 0.05768
+INFO:2025-11-13 11:41:16,824: Epoch [1/100], Step [10/11], Loss: 0.57445, Disc Loss: 3.92262, Dur Loss: 1.87087, CE Loss: 0.12382, Norm Loss: 1.32440, F0 Loss: 4.22477, LM Loss: 2.62630, Gen Loss: 4.27842, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 9.79213, Mono Loss: 0.08821
+INFO:2025-11-13 11:42:36,169: Validation loss: 0.678, Dur loss: 2.258, F0 loss: 5.647
+
+
+
+INFO:2025-11-13 11:45:08,488: Epoch [2/100], Step [5/11], Loss: 0.34680, Disc Loss: 3.98385, Dur Loss: 1.75926, CE Loss: 0.19965, Norm Loss: 0.80854, F0 Loss: 2.29948, LM Loss: 1.44500, Gen Loss: 3.90846, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 8.50706, Mono Loss: 0.48614
+INFO:2025-11-13 11:47:40,271: Epoch [2/100], Step [10/11], Loss: 0.50934, Disc Loss: 3.91930, Dur Loss: 2.40840, CE Loss: 0.24134, Norm Loss: 1.19229, F0 Loss: 4.95336, LM Loss: 1.71478, Gen Loss: 3.76339, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 9.07787, Mono Loss: 0.24173
+INFO:2025-11-13 11:49:13,585: Validation loss: 0.620, Dur loss: 2.204, F0 loss: 5.396
+
+
+
+INFO:2025-11-13 11:51:54,518: Epoch [3/100], Step [5/11], Loss: 0.57578, Disc Loss: 3.82390, Dur Loss: 1.83133, CE Loss: 0.11254, Norm Loss: 0.83192, F0 Loss: 3.93491, LM Loss: 1.86236, Gen Loss: 4.32651, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 9.22803, Mono Loss: 0.12665
+INFO:2025-11-13 11:54:01,055: Epoch [3/100], Step [10/11], Loss: 0.40083, Disc Loss: 3.83309, Dur Loss: 2.03317, CE Loss: 0.12404, Norm Loss: 2.46328, F0 Loss: 7.94870, LM Loss: 1.75660, Gen Loss: 4.18288, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 7.07191, Mono Loss: 0.05869
+INFO:2025-11-13 11:55:40,947: Validation loss: 0.620, Dur loss: 1.924, F0 loss: 4.987
+
+
+
+INFO:2025-11-13 11:57:49,457: Epoch [4/100], Step [5/11], Loss: 0.33241, Disc Loss: 3.90299, Dur Loss: 1.49676, CE Loss: 0.08759, Norm Loss: 1.88951, F0 Loss: 6.39248, LM Loss: 1.51608, Gen Loss: 3.90434, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 7.45042, Mono Loss: 0.11786
+INFO:2025-11-13 12:00:10,904: Epoch [4/100], Step [10/11], Loss: 0.52639, Disc Loss: 3.83975, Dur Loss: 1.70229, CE Loss: 0.08082, Norm Loss: 1.01552, F0 Loss: 3.25592, LM Loss: 1.79502, Gen Loss: 4.20546, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 8.09496, Mono Loss: 0.12471
+INFO:2025-11-13 12:01:38,465: Validation loss: 0.561, Dur loss: 1.845, F0 loss: 4.672
+
+
+
+INFO:2025-11-13 12:04:03,736: Epoch [5/100], Step [5/11], Loss: 0.38476, Disc Loss: 3.77398, Dur Loss: 1.84194, CE Loss: 0.09141, Norm Loss: 2.34547, F0 Loss: 6.76391, LM Loss: 2.59210, Gen Loss: 4.79334, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 6.18633, Mono Loss: 0.10624
+INFO:2025-11-13 12:06:18,175: Epoch [5/100], Step [10/11], Loss: 0.44685, Disc Loss: 3.75358, Dur Loss: 1.57363, CE Loss: 0.07748, Norm Loss: 1.29183, F0 Loss: 5.27688, LM Loss: 2.39256, Gen Loss: 4.55095, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 7.15675, Mono Loss: 0.12269
+INFO:2025-11-13 12:07:48,627: Validation loss: 0.604, Dur loss: 1.828, F0 loss: 4.746
+
+
+
+INFO:2025-11-13 12:10:23,038: Epoch [6/100], Step [5/11], Loss: 0.34696, Disc Loss: 3.72399, Dur Loss: 2.63169, CE Loss: 0.17336, Norm Loss: 1.93370, F0 Loss: 5.99571, LM Loss: 1.69461, Gen Loss: 4.37331, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 6.51649, Mono Loss: 0.10206
+INFO:2025-11-13 12:12:28,702: Epoch [6/100], Step [10/11], Loss: 0.46520, Disc Loss: 3.81981, Dur Loss: 1.44027, CE Loss: 0.06441, Norm Loss: 0.39747, F0 Loss: 1.40356, LM Loss: 1.96041, Gen Loss: 4.30864, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 4.94378, Mono Loss: 0.46933
+INFO:2025-11-13 12:13:54,266: Validation loss: 0.536, Dur loss: 1.675, F0 loss: 4.072
+
+
+
+INFO:2025-11-13 12:17:13,095: Epoch [7/100], Step [5/11], Loss: 0.45827, Disc Loss: 3.78639, Dur Loss: 1.87296, CE Loss: 0.09159, Norm Loss: 1.67693, F0 Loss: 6.92052, LM Loss: 2.89681, Gen Loss: 4.85686, Sty Loss: 0.00000, Diff Loss: 0.00000, DiscLM Loss: 0.00000, GenLM Loss: 0.00000, SLoss: 0.00000, S2S Loss: 5.05640, Mono Loss: 0.10439

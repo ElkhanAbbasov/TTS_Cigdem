@@ -41,7 +41,8 @@ class TextCleaner:
             try:
                 indexes.append(self.word_index_dictionary[char])
             except KeyError:
-                print(text)
+                # Skip unknown characters silently (no print to avoid Windows encoding issues)
+                continue
         return indexes
 
 np.random.seed(1)
@@ -84,6 +85,17 @@ class FilePathDataset(torch.utils.data.Dataset):
         self.text_cleaner = TextCleaner()
         self.sr = sr
 
+        # Build speaker ID mapping for text-based speaker IDs (e.g., "speaker1" -> 0)
+        unique_speakers = sorted(set(data[2] if len(data) == 3 else '0' for data in self.data_list))
+        self.speaker_map = {}
+        for idx, speaker in enumerate(unique_speakers):
+            # Try to parse as int first; if it fails, assign a numeric ID
+            try:
+                speaker_int = int(speaker)
+                self.speaker_map[speaker] = speaker_int
+            except ValueError:
+                self.speaker_map[speaker] = idx
+        
         self.df = pd.DataFrame(self.data_list)
 
         self.to_melspec = torchaudio.transforms.MelSpectrogram(**MEL_PARAMS)
@@ -93,11 +105,15 @@ class FilePathDataset(torch.utils.data.Dataset):
         self.max_mel_length = 192
         
         self.min_length = min_length
-        with open(OOD_data, 'r', encoding='utf-8') as f:
-            tl = f.readlines()
-        idx = 1 if '.wav' in tl[0].split('|')[0] else 0
-        self.ptexts = [t.split('|')[idx] for t in tl]
-        
+        if OOD_data and os.path.exists(OOD_data):
+            with open(OOD_data, 'r', encoding='utf-8') as f:
+                tl = f.readlines()
+            idx = 1 if '.wav' in tl[0].split('|')[0] else 0
+            self.ptexts = [t.split('|')[idx].strip() for t in tl if t.strip()]
+        else:
+            # Use training texts as OOD texts if no OOD file provided
+            self.ptexts = [data[1] for data in self.data_list]
+
         self.root_path = root_path
 
     def __len__(self):
@@ -115,8 +131,9 @@ class FilePathDataset(torch.utils.data.Dataset):
         length_feature = acoustic_feature.size(1)
         acoustic_feature = acoustic_feature[:, :(length_feature - length_feature % 2)]
         
-        # get reference sample
-        ref_data = (self.df[self.df[2] == str(speaker_id)]).sample(n=1).iloc[0].tolist()
+        # get reference sample - use original speaker text from data, not converted numeric ID
+        original_speaker_text = data[2] if len(data) == 3 else '0'
+        ref_data = (self.df[self.df[2] == original_speaker_text]).sample(n=1).iloc[0].tolist()
         ref_mel_tensor, ref_label = self._load_data(ref_data[:3])
         
         # get OOD text
@@ -137,7 +154,8 @@ class FilePathDataset(torch.utils.data.Dataset):
 
     def _load_tensor(self, data):
         wave_path, text, speaker_id = data
-        speaker_id = int(speaker_id)
+        # Convert speaker_id using the mapping (handles both numeric and text IDs)
+        speaker_id = self.speaker_map.get(speaker_id, int(speaker_id) if speaker_id.isdigit() else 0)
         wave, sr = sf.read(osp.join(self.root_path, wave_path))
         if wave.shape[-1] == 2:
             wave = wave[:, 0].squeeze()

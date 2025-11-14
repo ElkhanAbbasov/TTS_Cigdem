@@ -201,9 +201,18 @@ class WavLMLoss(torch.nn.Module):
     def forward(self, wav, y_rec):
         with torch.no_grad():
             wav_16 = self.resample(wav)
+            # Ensure wav_16 has shape [batch, time] for WavLM
+            wav_16 = wav_16.squeeze()
+            if wav_16.dim() == 1:
+                wav_16 = wav_16.unsqueeze(0)
             wav_embeddings = self.wavlm(input_values=wav_16, output_hidden_states=True).hidden_states
+            
         y_rec_16 = self.resample(y_rec)
-        y_rec_embeddings = self.wavlm(input_values=y_rec_16.squeeze(), output_hidden_states=True).hidden_states
+        # Ensure y_rec_16 has shape [batch, time] for WavLM
+        y_rec_16 = y_rec_16.squeeze()
+        if y_rec_16.dim() == 1:
+            y_rec_16 = y_rec_16.unsqueeze(0)
+        y_rec_embeddings = self.wavlm(input_values=y_rec_16, output_hidden_states=True).hidden_states
 
         floss = 0
         for er, eg in zip(wav_embeddings, y_rec_embeddings):
