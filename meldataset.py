@@ -156,7 +156,18 @@ class FilePathDataset(torch.utils.data.Dataset):
         wave_path, text, speaker_id = data
         # Convert speaker_id using the mapping (handles both numeric and text IDs)
         speaker_id = self.speaker_map.get(speaker_id, int(speaker_id) if speaker_id.isdigit() else 0)
-        wave, sr = sf.read(osp.join(self.root_path, wave_path))
+        
+        # Normalize path separators for the current OS
+        wave_path = wave_path.replace('/', os.sep).replace('\\', os.sep)
+        full_path = osp.join(self.root_path, wave_path)
+        
+        try:
+            wave, sr = sf.read(full_path)
+        except Exception as e:
+            logger.error(f"Error loading audio file: {full_path}")
+            logger.error(f"Error details: {str(e)}")
+            raise RuntimeError(f"Failed to load audio file: {full_path}") from e
+            
         if wave.shape[-1] == 2:
             wave = wave[:, 0].squeeze()
         if sr != 24000:
