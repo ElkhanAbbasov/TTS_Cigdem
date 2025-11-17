@@ -277,6 +277,15 @@ def main(config_path):
                     ref_ss = model.style_encoder(ref_mels.unsqueeze(1))
                     ref_sp = model.predictor_encoder(ref_mels.unsqueeze(1))
                     ref = torch.cat([ref_ss, ref_sp], dim=1)
+                    
+                    # Ensure ref matches batch size - expand to match the current batch
+                    batch_size = mels.size(0)
+                    if ref.size(0) != batch_size:
+                        # Either expand (if ref is smaller) or take first batch_size samples
+                        if ref.size(0) == 1:
+                            ref = ref.expand(batch_size, -1).contiguous()
+                        else:
+                            ref = ref[:batch_size]
                 
             try:
                 ppgs, s2s_pred, s2s_attn = model.text_aligner(mels, mask, texts)
