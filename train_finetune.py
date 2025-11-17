@@ -337,6 +337,12 @@ def main(config_path):
                     running_std.append(model.diffusion.module.diffusion.sigma_data)
                     
                 if multispeaker:
+                    # Expand ref to match bert_dur's flattened batch dimension
+                    # bert_dur shape: [batch_size, seq_len, features]
+                    # ref shape: [batch_size, features] -> needs to be [batch_size, seq_len, features]
+                    if ref.dim() == 2:
+                        ref = ref.unsqueeze(1).expand(-1, bert_dur.size(1), -1)
+                    
                     s_preds = sampler(noise = torch.randn_like(s_trg).unsqueeze(1).to(device), 
                           embedding=bert_dur,
                           embedding_scale=1,
