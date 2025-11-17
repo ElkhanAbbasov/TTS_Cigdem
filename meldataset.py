@@ -133,8 +133,15 @@ class FilePathDataset(torch.utils.data.Dataset):
         
         # get reference sample - use original speaker text from data, not converted numeric ID
         original_speaker_text = data[2] if len(data) == 3 else '0'
-        ref_data = (self.df[self.df[2] == original_speaker_text]).sample(n=1).iloc[0].tolist()
-        ref_mel_tensor, ref_label = self._load_data(ref_data[:3])
+        
+        # Filter data_list directly instead of using DataFrame to avoid multiprocessing issues
+        same_speaker_samples = [d for d in self.data_list if d[2] == original_speaker_text]
+        if len(same_speaker_samples) > 0:
+            ref_data = random.choice(same_speaker_samples)
+        else:
+            ref_data = data  # fallback to current sample if no matches
+        
+        ref_mel_tensor, ref_label = self._load_data(ref_data)
         
         # get OOD text
         
