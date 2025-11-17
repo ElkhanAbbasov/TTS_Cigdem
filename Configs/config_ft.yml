@@ -1,10 +1,10 @@
 log_dir: "Models/Cigdem_TTS"
-save_freq: 2  # Save more frequently to catch issues early
+save_freq: 5  # Save every 5 epochs (A100 is fast)
 log_interval: 5
 device: "cuda"
 epochs: 100  # More epochs since we have small dataset
-batch_size: 1  # Back to 1 for stability
-max_len: 200  # Keep reduced for VRAM
+batch_size: 4  # Increased for A100 GPU - faster training
+max_len: 300  # A100 has plenty of VRAM
 pretrained_model: "Models/Cigdem_TTS/checkpoints/epoch_2nd_00001.pth"  # Resume from your checkpoint
 second_stage_load_pretrained: true  # Load it
 load_only_params: false  # Load full state including optimizer
